@@ -1,6 +1,11 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"fmt"
+	"os"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func main() {
 	app := fiber.New()
@@ -9,5 +14,5 @@ func main() {
 		return c.SendString("hello")
 	})
 
-	app.Listen(":8080")
+	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
