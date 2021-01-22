@@ -21,5 +21,7 @@ func main() {
 		})
 	}
 
-	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
+	// TODO: Use TLS.
+	addr := fmt.Sprintf(":%s", os.Getenv("PORT"))
+	log.Fatal().Err(app.Listen(addr)).Str("addr", addr).Msg("Failed to listen")
 }
