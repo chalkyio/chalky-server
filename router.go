@@ -8,7 +8,9 @@ import (
 )
 
 func setupRouter() *fiber.App {
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		ErrorHandler: errorHandler,
+	})
 	app.Use(logger.New())
 
 	api := app.Group("/api")
