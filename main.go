@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/jackc/pgx/v4"
 	"github.com/rs/zerolog"
@@ -24,7 +23,6 @@ func main() {
 	db, err = pgx.Connect(infiniteContext, dbURL)
 	if err != nil {
 		log.Error().Err(err).Msg("Failed to connect to CockroachDB")
-		time.Sleep(time.Second * 50)
 	}
 
 	app := setupRouter()
