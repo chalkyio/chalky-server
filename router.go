@@ -21,7 +21,7 @@ func setupRouter() *fiber.App {
 		})
 
 		_ = createAuthMiddleware()
-		auth := api.Post("/auth", handleLogin)
+		auth := api.Group("/auth", handleLogin)
 		{
 			auth.Post("/login", handleLogin)
 			auth.Post("/register", handleRegistration)
