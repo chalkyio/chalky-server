@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/gofiber/fiber/v2 v2.3.3
+	github.com/gofiber/jwt/v2 v2.1.0
 	github.com/golang-migrate/migrate/v4 v4.14.1
 	github.com/jackc/pgx/v4 v4.10.1
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
