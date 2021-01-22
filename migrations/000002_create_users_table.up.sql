@@ -3,5 +3,6 @@ CREATE TABLE IF NOT EXISTS users (
     username STRING (32) NOT NULL UNIQUE,
     display_name STRING (40),
     icon STRING,
+    password_hash BYTES NOT NULL,
     INDEX(username)
 );
