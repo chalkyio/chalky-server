@@ -14,6 +14,7 @@ func setupRouter() *fiber.App {
 	api := app.Group("/api")
 	{
 		api.Get("/health", func(c *fiber.Ctx) error {
+			// We're up!
 			return c.SendStatus(http.StatusOK)
 		})
 	}
