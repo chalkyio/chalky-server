@@ -2,26 +2,15 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
 
 func main() {
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
-	app := fiber.New()
-	app.Use(logger.New())
-
-	api := app.Group("/api")
-	{
-		api.Get("/health", func(c *fiber.Ctx) error {
-			return c.SendStatus(http.StatusOK)
-		})
-	}
+	app := setupRouter()
 
 	// TODO: Use TLS.
 	addr := fmt.Sprintf(":%s", os.Getenv("PORT"))
