@@ -25,7 +25,7 @@ func main() {
 	hostname, _ := os.Hostname()
 	log.Info().Msg("I am " + hostname)
 
-	log.Info().Msg("Attempting to migrate database")
+	log.Info().Str("uri", databaseURI).Msg("Attempting to migrate database")
 	migrator, err := migrate.New(
 		"file://migrations",
 		"cockroachdb://"+databaseURI+"/defaultdb?sslmode=disable",
