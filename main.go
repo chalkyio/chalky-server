@@ -11,6 +11,7 @@ import (
 )
 
 var db *pg.DB
+var infiniteContext = context.Background()
 
 func main() {
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
@@ -21,7 +22,7 @@ func main() {
 		User:     "root",
 		Database: "defaultdb",
 	})
-	if err := db.Ping(context.Background()); err != nil {
+	if err := db.Ping(infiniteContext); err != nil {
 		log.Fatal().Err(err).Msg("Failed to ping CockroachDB")
 	}
 
