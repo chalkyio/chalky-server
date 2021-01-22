@@ -19,7 +19,7 @@ func main() {
 
 	// TODO: Use a DB other than defaultdb and a less powerful user.
 	dbURL := fmt.Sprintf("postgres://root@chalky-cockroachdb-public/defaultdb")
-	db, err = pgx.Connect(context.Background(), dbURL)
+	db, err = pgx.Connect(infiniteContext, dbURL)
 	if err != nil {
 		log.Fatal().Err(err).Str("url", dbURL).Msg("Failed to connect to CockroachDB")
 	}
