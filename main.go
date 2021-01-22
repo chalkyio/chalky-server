@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -13,9 +14,12 @@ func main() {
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("hello")
-	})
+	api := app.Group("/api")
+	{
+		api.Get("/health", func(c *fiber.Ctx) error {
+			return c.SendStatus(http.StatusOK)
+		})
+	}
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
