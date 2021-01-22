@@ -40,7 +40,7 @@ func handleLogin(c *fiber.Ctx) error {
 	// Retrieve the password hash from the DB.
 	var userID string
 	var hash []byte
-	if err := db.QueryRow(infiniteContext, "SELECT id, password_hash FROM users WHERE username = ?", data.Username).Scan(&userID, &hash); err != nil {
+	if err := db.QueryRow(infiniteContext, "SELECT id, password_hash FROM users WHERE username = $1", data.Username).Scan(&userID, &hash); err != nil {
 		if err == pgx.ErrNoRows {
 			// The user doesn't exist.
 			resp, _ := json.Marshal(responseBody{
