@@ -3,6 +3,7 @@ module chalky-server
 go 1.15
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gofiber/fiber/v2 v2.3.3
 	github.com/gofiber/jwt/v2 v2.1.0
 	github.com/golang-migrate/migrate/v4 v4.14.1
