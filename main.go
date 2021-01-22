@@ -33,7 +33,7 @@ func main() {
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to create migration manager")
 	}
-	if err := migrator.Up(); err != nil {
+	if err := migrator.Up(); err != nil && err.Error() != "no change" {
 		log.Fatal().Err(err).Msg("Failed to migrate database")
 	}
 
