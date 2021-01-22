@@ -33,6 +33,7 @@ func main() {
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to create migration manager")
 	}
+	// Here, we don't care if the changes were already applied.
 	if err := migrator.Up(); err != nil && err.Error() != "no change" {
 		log.Fatal().Err(err).Msg("Failed to migrate database")
 	}
