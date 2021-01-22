@@ -17,6 +17,13 @@ func setupRouter() *fiber.App {
 			// We're up!
 			return c.SendStatus(http.StatusOK)
 		})
+
+		_ = createAuthMiddleware()
+		auth := api.Post("/auth", handleLogin)
+		{
+			auth.Post("/login", handleLogin)
+			auth.Post("/register", handleRegistration)
+		}
 	}
 
 	return app
