@@ -5,25 +5,23 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/go-pg/pg/v10"
+	"github.com/jackc/pgx/v4"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
 
-var db *pg.DB
+var db *pgx.Conn
 var infiniteContext = context.Background()
 
 func main() {
+	var err error
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 
-	// TODO: Use a less powerful user and use a DB other than defaultdb.
-	db = pg.Connect(&pg.Options{
-		Addr:     "chalky-cockroachdb-public",
-		User:     "root",
-		Database: "defaultdb",
-	})
-	if err := db.Ping(infiniteContext); err != nil {
-		log.Fatal().Err(err).Msg("Failed to ping CockroachDB")
+	// TODO: Use a DB other than defaultdb and a less powerful user.
+	dbURL := fmt.Sprintf("postgres://root@chalky-cockroachdb-public/defaultdb")
+	db, err = pgx.Connect(context.Background(), dbURL)
+	if err != nil {
+		log.Fatal().Err(err).Str("url", dbURL).Msg("Failed to connect to CockroachDB")
 	}
 
 	app := setupRouter()
